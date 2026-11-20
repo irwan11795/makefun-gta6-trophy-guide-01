@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vice City Trophy Guide — GTA VI Platinum Roadmap</title>
+<link rel="stylesheet" href="style.css">
+<script type="module" src="app.js"></script>
+</head>
+<body>
+<header class="hero">
+  <p class="eyebrow">Grand Theft Auto VI &middot; PlayStation 5 &middot; 100% offline</p>
+  <h1>Vice City Trophy Guide</h1>
+  <p class="subtitle">Every one of the 55 trophies, a guide in our own words for each, a tracker that remembers your progress, and a roadmap to the platinum. No online trophies, no difficulty trophy, one playthrough, about 200 hours.</p>
+  <p class="facts"><span>1 platinum</span><span>2 gold</span><span>6 silver</span><span>46 bronze</span><span>28 hidden</span><span>Difficulty 4/10</span></p>
+</header>
+
+<main>
+  <section id="progress" class="card progress-card" aria-label="Progress">
+    <div class="progress-head">
+      <h2>Your progress</h2>
+      <p class="progress-count"><strong id="earnedCount">0</strong> / 55 earned &middot; <span id="percent">0%</span></p>
+    </div>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" id="progressBar"><div id="progressFill"></div></div>
+    <ul class="grade-counts">
+      <li><span class="dot platinum"></span>Platinum <strong id="countPlatinum">0/1</strong></li>
+      <li><span class="dot gold"></span>Gold <strong id="countGold">0/2</strong></li>
+      <li><span class="dot silver"></span>Silver <strong id="countSilver">0/6</strong></li>
+      <li><span class="dot bronze"></span>Bronze <strong id="countBronze">0/46</strong></li>
+    </ul>
+    <p class="platinum-note" id="platinumNote">The platinum pops the moment the other 54 are earned. Tick trophies off as you earn them in the game.</p>
+    <div class="progress-actions">
+      <button type="button" id="exportBtn">Export progress (JSON)</button>
+      <label class="import-label" for="importFile">Import progress (JSON)</label>
+      <input type="file" id="importFile" accept=".json,application/json" hidden>
+      <button type="button" id="resetBtn" class="quiet">Reset progress</button>
+    </div>
+  </section>
+
+  <section class="card missable-banner" id="missableBanner" aria-label="Missable warning">
+    <h2>&#9888; One missable trophy — read this first</h2>
+    <p><strong>Positive Mental Attitude</strong> is the only trophy in the game that can be missed. Lucia invites you to meditate on the balcony at Jason&rsquo;s house on a morning after the Down to Earth mission in Chapter 1 — that invitation is gone once Chapter 1 ends, and there is no mission replay and no New Game+. Take it the moment it is offered. The last of the 18 meditation spots needs Jason and Lucia together, after Chapter 2. <button type="button" class="linklike" data-open-trophy="28">Open its guide &rarr;</button></p>
+  </section>
+
+  <section class="card controls" aria-label="Filters">
+    <div class="control-row">
+      <label>Search <input type="search" id="searchInput" placeholder="Trophy, mission or keyword…" autocomplete="off"></label>
+      <label>Kind
+        <select id="kindFilter">
+          <option value="all">All kinds</option>
+          <option value="story">Story</option>
+          <option value="completion">100% completion</option>
+          <option value="activity">Activities</option>
+          <option value="robbery">Robberies</option>
+          <option value="combat">Combat</option>
+          <option value="collectible">Collectibles</option>
+          <option value="exploration">Exploration</option>
+          <option value="money">Money</option>
+          <option value="side">Strangers &amp; side strands</option>
+          <option value="misc">Misc</option>
+          <option value="platinum">Platinum</option>
+          <option value="missable">Missable only</option>
+        </select>
+      </label>
+      <label>Grade
+        <select id="gradeFilter">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+      </label>
+    </div>
+    <div class="control-row toggles">
+      <label class="toggle"><input type="checkbox" id="spoilerToggle" checked> Hide story spoilers (story trophies stay &ldquo;???&rdquo; until earned)</label>
+      <label class="toggle"><input type="checkbox" id="earnedOnlyToggle"> Earned only</label>
+      <label class="toggle"><input type="checkbox" id="unconfirmedToggle"> Unconfirmed triggers only</label>
+      <p class="showing" id="showingLine">Showing 55 of 55 trophies.</p>
+    </div>
+  </section>
+
+  <section class="card roadmap" id="roadmap" aria-label="Roadmap to the platinum">
+    <h2>Roadmap to the platinum</h2>
+    <p class="roadmap-intro">Three phases, in this order. Story first, clean-up second, stranger strands last. Save manually at the start and end of every chapter (15 save slots) — there is no New Game+ and cheats disable trophies.</p>
+    <ol class="steps">
+      <li>
+        <h3>Step 1 — The story <span class="time">60–80 hours &middot; 5 chapters</span></h3>
+        <p>Play the main missions through all five chapters. Every story trophy pops on its own as missions and chapters end — none of them can be missed. Two things to do while you play: take the balcony meditation in Chapter 1 the morning after Down to Earth (see the warning above), and scan vehicles and learn animals from the start, because those counts feed the 100% checklist later.</p>
+        <p class="step-trophies">Earns: all 12 story trophies + the final-mission gold.</p>
+      </li>
+      <li>
+        <h3>Step 2 — 100% completion clean-up <span class="time">about 100 hours after the story</span></h3>
+        <p>Open Progress &gt; Stats &gt; 100% Completion and work the checklist category by category: 100 optional tasks, 39 gang operations, 22 bank jobs, 7 payday loan jobs, 8 bank vaults, 34 of 35 smash &rsquo;n&rsquo; grabs, 50 of 91 stick-ups, $100k of narcotics, $100k of jewellery, $250k of marked bills, $200k of fenced vehicles, 15 of 18 card sets, 100 WAiNK scans, 33 underwater finds, 100 flamingos, 30 race wins, 42 gold shooting-range medals, 42 drone time trials, 300 stunts, 70 of 80 challenges, 15 of Bret&rsquo;s target decks, 200 vehicles and 50 weapons found, 100 animals.</p>
+        <p class="step-trophies">Earns: A Long Road (gold) and most activity, robbery, collectible and money trophies.</p>
+      </li>
+      <li>
+        <h3>Step 3 — Strangers &amp; Freaks and character finales <span class="time">10–20 hours</span></h3>
+        <p>Finish the eight stranger strands that count (Kirk, Kyle, Yago, Pilot Pete and four more — Moses, Tyrone, Yasmani, Andy and Billy do not count here) and the final mission of each character strand: Andy, Kenton, Billy, Randy and Tyrone. These strands stay open after the story, so nothing here can be missed.</p>
+        <p class="step-trophies">Earns: Strangers &amp; Freaks (silver) and the five character-finale trophies.</p>
+      </li>
+    </ol>
+    <h3>100% checklist at a glance</h3>
+    <ul class="checklist-summary">
+      <li>250 stunts for Cunning Stunts (300 for 100%)</li>
+      <li>42 gold medals, 12 shooting ranges — The Shootist</li>
+      <li>1 drone-race win at each of 14 locations — Top Fun</li>
+      <li>20 different race wins — Earn Cash, Not Kudos</li>
+      <li>3 of 18 card sets — Don&rsquo;t Touch My Deck (15 for 100%)</li>
+      <li>100 WAiNK photos — You WAiNKer!</li>
+      <li>100 vehicles scanned — Whip It Good (200 for 100%)</li>
+      <li>5 of 8 bank vaults — Maximum Withdrawal</li>
+      <li>1 illegal operation per gang, 9 gangs — Pest Control</li>
+      <li>$250k marked bills laundered — Dime on the Dollar</li>
+      <li>8 garages bought — Little Boxes</li>
+      <li>All of Leonida explored — The Goodtime State</li>
+    </ul>
+  </section>
+
+  <section id="listSection" aria-label="Trophy checklist">
+    <h2 class="list-heading">All 55 trophies <span id="listCount"></span></h2>
+    <ul id="trophyList" class="trophy-list"></ul>
+    <p class="empty" id="emptyLine" hidden>No trophies match these filters. Clear the search or change a filter.</p>
+  </section>
+
+  <section class="card sources" id="sources" aria-label="Sources">
+    <h2>Sources</h2>
+    <p>Every guide on this page is written in our own words for this entry. The facts behind each guide come from the sources below, named beside each trophy&rsquo;s guide; the trophy names and descriptions are the official PlayStation text, shown exactly as published. Links open only if you follow them — this page fetches nothing.</p>
+    <ul class="source-list">
+      <li><a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/">PowerPyx — GTA 6 Trophy Guide &amp; Roadmap</a></li>
+      <li><a href="https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series">GTABase — GTA 6 Achievements &amp; Trophies List</a></li>
+      <li><a href="https://www.keengamer.com/articles/guides/gta-6-trophy-guide-platinum-roadmap-all-55-trophies/">KeenGamer — GTA 6 Trophy Guide, Platinum Roadmap &amp; All 55 Trophies</a></li>
+      <li><a href="https://howtovideogame.com/gta-6-trophies/">HowToVideoGame — GTA 6 Trophies</a></li>
+      <li><a href="https://gta-zone.com/news/gta-6-trophies-achievements/">GTA Zone — GTA 6 Trophies &amp; Achievements</a></li>
+      <li><a href="https://press-start.com.au/news/2026/11/18/gta-6-trophy-list/">Press Start — GTA 6 Trophy List (18 Nov 2026)</a></li>
+    </ul>
+    <p class="fineprint">Unofficial fan guide. Not affiliated with Rockstar Games. No Rockstar logo, artwork or game screenshot is used anywhere on this page; the look is our own. Progress is stored only in your browser (localStorage) and in files you choose to export. MIT licensed.</p>
+  </section>
+</main>
+
+<div class="overlay" id="detailOverlay" hidden role="dialog" aria-modal="true" aria-labelledby="detailName">
+  <article class="detail card" id="detailCard">
+    <button type="button" class="close" id="detailClose" aria-label="Close guide">&times;</button>
+    <p class="detail-kicker"><span id="detailGradeBadge" class="grade-badge bronze">Bronze</span> <span id="detailKind"></span><span id="detailChapter"></span></p>
+    <h2 id="detailName"></h2>
+    <p class="detail-desc"><span class="label">Official description</span><span id="detailDesc"></span></p>
+    <p class="detail-badges"><span id="detailHidden" class="badge hidden-badge" hidden>Hidden trophy</span><span id="detailMissable" class="badge missable-badge" hidden>Missable</span><span id="detailUnconfirmed" class="badge unconfirmed-badge" hidden>Trigger unconfirmed</span></p>
+    <p class="detail-missable" id="detailMissableNote" hidden></p>
+    <p class="detail-unconfirmed" id="detailUnconfirmedNote" hidden></p>
+    <h3>Guide</h3>
+    <p id="detailGuide"></p>
+    <h3>Sources for this guide</h3>
+    <ul class="detail-sources" id="detailSources"></ul>
+    <label class="toggle detail-earned"><input type="checkbox" id="detailEarned"> I earned this trophy</label>
+  </article>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,383 @@
+/* Vice City Trophy Guide — original sunset/neon look, system fonts only, no external files. */
+:root {
+  --ink: #241a2e;
+  --ink-soft: #5c4a68;
+  --paper: #fff7ee;
+  --card: #ffffff;
+  --line: #e8d5c4;
+  --sunset-1: #ff7a3d;
+  --sunset-2: #ff2e88;
+  --sunset-3: #7b2ff7;
+  --teal: #00b3a6;
+  --gold: #b8860b;
+  --silver: #6b7280;
+  --bronze: #9a5b2e;
+  --platinum: #0e7490;
+  --danger-bg: #fff1e6;
+  --danger-line: #e0651f;
+  --ok: #15803d;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  color: var(--ink);
+  background: var(--paper);
+  line-height: 1.5;
+}
+
+.hero {
+  padding: 22px 20px 18px;
+  color: #fff;
+  background: linear-gradient(160deg, #2b1055 0%, #7597de 0%, #ff7a3d 46%, #ff2e88 72%, #7b2ff7 100%);
+  background: linear-gradient(160deg, #1d0b38 0%, #ff7a3d 48%, #ff2e88 74%, #7b2ff7 100%);
+  text-align: center;
+}
+
+.hero .eyebrow {
+  margin: 0 0 8px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  font-size: 12px;
+  font-weight: 700;
+  opacity: 0.92;
+}
+
+.hero h1 {
+  margin: 0 0 8px;
+  font-size: 36px;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.hero .subtitle {
+  max-width: 760px;
+  margin: 0 auto 14px;
+  font-size: 16px;
+}
+
+.hero .facts {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.hero .facts span {
+  background: rgba(0, 0, 0, 0.32);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 3px 12px;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+main {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 14px 16px 48px;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Visual order: tracker first, roadmap after the checklist. */
+#progress { order: 1; }
+#missableBanner { order: 2; }
+.controls { order: 3; }
+#listSection { order: 4; }
+#roadmap { order: 5; }
+#sources { order: 6; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  box-shadow: 0 2px 10px rgba(60, 20, 60, 0.06);
+}
+
+h2 { margin: 0 0 10px; font-size: 21px; line-height: 1.25; }
+h3 { margin: 14px 0 6px; font-size: 16px; }
+
+/* Progress */
+.progress-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.progress-head h2 { margin: 0; }
+.progress-count { margin: 0; font-size: 17px; }
+.progress-count strong { font-size: 24px; }
+
+.bar {
+  height: 14px;
+  background: #f1e4d8;
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.bar > div {
+  height: 100%;
+  width: 0;
+  background: linear-gradient(90deg, var(--sunset-1), var(--sunset-2), var(--sunset-3));
+  border-radius: 999px;
+  transition: width 0.25s ease;
+}
+
+.grade-counts {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 14px;
+}
+
+.dot {
+  display: inline-block;
+  width: 11px;
+  height: 11px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: -1px;
+}
+.dot.platinum { background: #38bdf8; }
+.dot.gold { background: #eab308; }
+.dot.silver { background: #9ca3af; }
+.dot.bronze { background: #b45309; }
+
+.platinum-note { margin: 4px 0 12px; color: var(--ink-soft); font-size: 14px; }
+
+.progress-actions { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+
+button, .import-label {
+  font: inherit;
+  cursor: pointer;
+  border-radius: 9px;
+  border: 1px solid #d8c3ae;
+  background: #fff;
+  color: var(--ink);
+  padding: 8px 14px;
+  font-weight: 600;
+  font-size: 14px;
+}
+
+button:hover, .import-label:hover { background: #fff1e6; }
+
+button.primary { background: var(--sunset-2); border-color: var(--sunset-2); color: #fff; }
+button.quiet { border-color: transparent; background: transparent; color: var(--ink-soft); }
+
+/* Missable banner */
+.missable-banner {
+  background: var(--danger-bg);
+  border: 2px solid var(--danger-line);
+}
+
+.missable-banner h2 { color: #9a3412; }
+.missable-banner p { margin: 0; }
+
+.linklike {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #b91c1c;
+  font-weight: 700;
+  text-decoration: underline;
+}
+
+/* Controls */
+.control-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  align-items: end;
+}
+
+.control-row label { font-size: 13px; font-weight: 700; color: var(--ink-soft); }
+.control-row input[type="search"], .control-row select {
+  display: block;
+  margin-top: 4px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--ink);
+  padding: 8px 10px;
+  border: 1px solid #d8c3ae;
+  border-radius: 9px;
+  background: #fff;
+  min-width: 210px;
+}
+
+.control-row input[type="search"] { min-width: 280px; }
+
+.toggles { margin-top: 12px; align-items: center; }
+.toggle { font-weight: 500 !important; color: var(--ink) !important; font-size: 14px !important; }
+.toggle input { margin-right: 6px; accent-color: #d6246e; }
+.showing { margin: 0 0 0 auto; font-size: 13px; color: var(--ink-soft); }
+
+/* Roadmap */
+.roadmap-intro { margin-top: 0; }
+.steps { margin: 0; padding-left: 22px; }
+.steps li { margin-bottom: 12px; }
+.steps h3 { margin: 0 0 4px; }
+.steps .time {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  background: var(--teal);
+  border-radius: 999px;
+  padding: 2px 9px;
+  vertical-align: 2px;
+  white-space: nowrap;
+}
+.steps p { margin: 0 0 4px; }
+.step-trophies { color: var(--ink-soft); font-size: 14px; }
+
+.checklist-summary {
+  columns: 2;
+  column-gap: 28px;
+  margin: 6px 0 0;
+  padding-left: 20px;
+  font-size: 14px;
+}
+.checklist-summary li { break-inside: avoid; margin-bottom: 3px; }
+
+/* Trophy list */
+.list-heading { font-size: 21px; margin: 6px 0 12px; }
+.trophy-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.trophy {
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+.trophy.earned { border-color: var(--ok); background: #f4fbf4; }
+
+.trophy-top { display: flex; align-items: flex-start; gap: 10px; }
+.trophy-top input[type="checkbox"] { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--ok); flex: none; }
+.trophy-name { font-size: 16px; font-weight: 700; line-height: 1.3; margin: 0; }
+.trophy-name.spoiler { color: var(--ink-soft); letter-spacing: 0.04em; }
+.trophy-desc { margin: 0; color: var(--ink-soft); font-size: 14px; }
+
+.grade-badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding: 3px 9px;
+  color: #fff;
+  white-space: nowrap;
+}
+.grade-badge.platinum { background: var(--platinum); }
+.grade-badge.gold { background: #ca8a04; }
+.grade-badge.silver { background: var(--silver); }
+.grade-badge.bronze { background: var(--bronze); }
+
+.trophy-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; font-size: 12px; }
+.kind-tag {
+  background: #f1e4d8;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-weight: 700;
+  text-transform: capitalize;
+}
+.badge {
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-weight: 700;
+}
+.hidden-badge { background: #e9e5f7; color: #4c1d95; }
+.missable-badge { background: #fee2e2; color: #991b1b; }
+.unconfirmed-badge { background: #fef3c7; color: #92400e; }
+
+.trophy-foot { display: flex; justify-content: space-between; align-items: center; gap: 8px; margin-top: auto; }
+.trophy-foot .guide-link { font-size: 14px; padding: 6px 11px; }
+.trophy-foot .chapter { font-size: 12px; color: var(--ink-soft); }
+
+.empty { color: var(--ink-soft); }
+
+/* Sources */
+.source-list { margin: 0 0 10px; padding-left: 20px; }
+.source-list li { margin-bottom: 4px; }
+.source-list a { color: #b91c6e; }
+.fineprint { font-size: 13px; color: var(--ink-soft); margin: 0; }
+
+/* Detail overlay */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(20, 8, 32, 0.62);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 32px 16px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.overlay[hidden] { display: none; }
+
+.detail { max-width: 780px; width: 100%; position: relative; margin: auto 0; }
+.detail .close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 26px;
+  line-height: 1;
+  border: none;
+  background: none;
+  padding: 4px 8px;
+  color: var(--ink-soft);
+}
+
+.detail-kicker { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin: 0 0 6px; font-size: 13px; color: var(--ink-soft); }
+.detail h2 { font-size: 26px; padding-right: 36px; }
+.detail-desc { background: #fdf2e9; border-left: 4px solid var(--sunset-1); padding: 10px 12px; border-radius: 0 8px 8px 0; }
+.detail-desc .label { display: block; font-size: 11px; font-weight: 800; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 2px; }
+.detail-badges { display: flex; gap: 6px; flex-wrap: wrap; margin: 10px 0; }
+.detail-badges:empty { display: none; }
+.detail-missable, .detail-unconfirmed {
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 14px;
+}
+.detail-missable { background: #fee2e2; border: 1px solid #fca5a5; }
+.detail-unconfirmed { background: #fef3c7; border: 1px solid #fcd34d; }
+.detail-sources { margin: 0 0 12px; padding-left: 20px; }
+.detail-sources a { color: #b91c6e; }
+.detail-earned { font-size: 15px; font-weight: 700; }
+
+body.roadmap-view #listSection,
+body.roadmap-view #sources { display: none; }
+body.roadmap-view .controls { display: none; }
+
+@media (max-width: 720px) {
+  .hero h1 { font-size: 32px; }
+  .trophy-list { grid-template-columns: 1fr; }
+  .checklist-summary { columns: 1; }
+  .control-row input[type="search"] { min-width: 0; width: 100%; }
+  .showing { margin-left: 0; }
+}
