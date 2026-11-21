@@ -1,7 +1,26 @@
-// Vice City Trophy Guide — tracker, filters, spoiler setting, export/import, detail view.
-// All data comes from data/trophies.json in this folder. Nothing is fetched from the network.
+// Vice City Trophy Guide v3 — tracker, filters, spoiler setting, export/import, detail view,
+// plus the Mile Zero-style audit: honest counts computed from the data, cited step-by-step cards
+// for the key trophies (the one missable + the six unconfirmed), an open-questions section, and
+// a last-chance panel. All data comes from data/trophies.json in this folder. Nothing is fetched
+// from the network.
 const DATA_URL = 'data/trophies.json';
 const STORAGE_KEY = 'gta6-trophy-guide-v1';
+
+// The seven trophies that decide whether a playthrough can still reach the platinum:
+// the one missable trophy first, then the six whose triggers are unconfirmed.
+const KEY_TROPHY_IDS = [28, 29, 44, 45, 49, 50, 51];
+
+// "Our call" for each unconfirmed trophy — taken from that trophy's own guide in
+// trophies.json, not invented: follow the confirmed part, check the linked sources,
+// and never print a guess as a method.
+const OUR_CALLS = {
+  29: 'Follow Bret\u2019s strand as Jason and do the confirmed part — the hunting jobs themselves. Check the linked sources for the latest word on the exact animal before you head out.',
+  44: 'Head to the Ocean Beach waterfront bars and look for the prompt, but do not grind it blind: check the linked sources for the latest confirmed trigger first.',
+  45: 'Do not waste time ramming every dealership until a source confirms the spot. Wait for a confirmed showroom, then go in with the glass-front approach the description points at.',
+  49: 'Do not chase a second attempt at everything. When the community pins the trigger down, the linked sources will be the first place it appears.',
+  50: 'Treat any odd encounter as a candidate, and watch the linked sources for the confirmed method — do not treat a strange event as the trigger until a source confirms it.',
+  51: 'The name suggests knocking someone down with a melee attack from a moving vehicle, but this guide does not state a method as fact. Wait for a confirmed trigger.',
+};
 
 const SOURCE_URLS = {
   'PowerPyx': 'https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/',
@@ -180,9 +199,22 @@ function renderList() {
   }).join('');
 }
 
-function renderAll() {
-  renderProgress();
-  renderList();
+// Audit: every number is counted from the loaded trophy data, so the header can
+// never claim more than the page actually shows. A count of 0 would be printed
+// as 0, not hidden.
+function renderAudit() {
+  const total = trophies.length;
+  const withGuide = trophies.filter((t) => t.guide && t.guide.trim().length > 0).length;
+  const withSources = trophies.filter((t) => Array.isArray(t.sources) && t.sources.length > 0).length;
+  const citedSources = [...new Set(trophies.flatMap((t) => t.sources || []))];
+  document.getElementById('auditTotal').textContent = total + ' of ' + total;
+  document.getElementById('auditGuides').textContent = withGuide + ' of ' + total;
+  document.getElementById('auditSources').textContent = withSources + ' of ' + total;
+  document.getElementById('auditSourceCount').textContent = String(citedSources.length);
+  document.getElementById('auditStory').textContent = String(trophies.filter((t) => t.story).length);
+  document.getElementById('auditHidden').textContent = String(trophies.filter((t) => t.hidden).length);
+  document.getElementById('auditMissable').textContent = String(trophies.filter((t) => t.missable).length);
+  document.getElementById('auditUnconfirmed').textContent = String(trophies.filter((t) => t.unconfirmed).length);
 }
 
 function sourceLinks(names) {
@@ -191,6 +223,69 @@ function sourceLinks(names) {
     const label = escapeHtml(name);
     return url ? '<li><a href="' + url + '">' + label + '</a></li>' : '<li>' + label + '</li>';
   }).join('');
+}
+
+function keyCardHtml(trophy) {
+  const badges = [
+    trophy.missable ? '<span class="badge missable-badge">Missable</span>' : '',
+    trophy.unconfirmed ? '<span class="badge unconfirmed-badge">Trigger unconfirmed</span>' : '',
+    trophy.hidden ? '<span class="badge hidden-badge">Hidden</span>' : '',
+  ].join('');
+  const why = trophy.missable
+    ? 'The only trophy in the game that can be missed.'
+    : 'Its exact trigger has not been confirmed by the major guides yet.';
+  return '<article class="key-card">' +
+    '<div class="key-head"><h3>' + escapeHtml(trophy.name) + '</h3>' +
+    '<span class="grade-badge ' + trophy.grade + '">' + gradeLabel(trophy.grade) + '</span></div>' +
+    '<p class="key-why">' + escapeHtml(why) + '</p>' +
+    '<p class="key-desc"><span class="label">Official description</span>' + escapeHtml(trophy.description) + '</p>' +
+    '<p class="key-guide"><span class="label">Guide, as written on this page</span>' + escapeHtml(trophy.guide) + '</p>' +
+    (trophy.missableNote ? '<p class="key-missable">' + escapeHtml(trophy.missableNote) + '</p>' : '') +
+    (trophy.unconfirmedNote ? '<p class="key-unconfirmed">What is not confirmed: ' + escapeHtml(trophy.unconfirmedNote) + '</p>' : '') +
+    '<p class="key-sources-label">Sources for this guide</p>' +
+    '<ul class="key-sources">' + sourceLinks(trophy.sources) + '</ul>' +
+    '<div class="key-meta"><span class="kind-tag">' + escapeHtml(KIND_LABELS[trophy.kind] || trophy.kind) + '</span>' + badges +
+    '<button type="button" class="guide-link" data-open-trophy="' + trophy.id + '">Open full guide</button></div>' +
+    '</article>';
+}
+
+function renderKeyTrophies() {
+  const keyed = KEY_TROPHY_IDS.map((id) => trophies.find((t) => t.id === id)).filter(Boolean);
+  document.getElementById('keyTrophyList').innerHTML = keyed.map(keyCardHtml).join('');
+}
+
+function renderOpenQuestions() {
+  const open = trophies.filter((t) => t.unconfirmed);
+  document.getElementById('openQuestionList').innerHTML = open.map((trophy) => {
+    return '<article class="question-card">' +
+      '<div class="key-head"><h3>' + escapeHtml(trophy.name) + '</h3>' +
+      '<span class="grade-badge ' + trophy.grade + '">' + gradeLabel(trophy.grade) + '</span></div>' +
+      '<p class="question-known"><span class="label">What is known</span>' + escapeHtml(trophy.unconfirmedNote || trophy.description) + '</p>' +
+      '<p class="question-call"><span class="label">Our call</span>' + escapeHtml(OUR_CALLS[trophy.id] || 'No method is printed as fact. Check the linked sources for the latest confirmed trigger.') + '</p>' +
+      '<ul class="key-sources">' + sourceLinks(trophy.sources) + '</ul>' +
+      '<button type="button" class="guide-link" data-open-trophy="' + trophy.id + '">Open full guide</button>' +
+      '</article>';
+  }).join('');
+}
+
+function renderLastChance() {
+  const missables = trophies.filter((t) => t.missable);
+  document.getElementById('lastChanceList').innerHTML = missables.map((trophy) => {
+    return '<article class="lastchance-card">' +
+      '<div class="key-head"><h3>' + escapeHtml(trophy.name) + '</h3>' +
+      '<span class="grade-badge ' + trophy.grade + '">' + gradeLabel(trophy.grade) + '</span>' +
+      '<span class="badge missable-badge">Missable</span></div>' +
+      '<p class="lastchance-desc"><span class="label">Official description</span>' + escapeHtml(trophy.description) + '</p>' +
+      '<p class="lastchance-when"><span class="label">Last chance</span>' + escapeHtml(trophy.missableNote || '') + '</p>' +
+      '<p class="lastchance-guide"><span class="label">Guide, as written on this page</span>' + escapeHtml(trophy.guide) + '</p>' +
+      '<button type="button" class="guide-link" data-open-trophy="' + trophy.id + '">Open full guide</button>' +
+      '</article>';
+  }).join('');
+}
+
+function renderAll() {
+  renderProgress();
+  renderList();
 }
 
 function openDetail(id) {
@@ -319,13 +414,9 @@ async function init() {
     const box = event.target.closest('[data-earn]');
     if (box) setEarned(box.dataset.earn, box.checked);
   });
-  document.getElementById('trophyList').addEventListener('click', (event) => {
+  document.addEventListener('click', (event) => {
     const button = event.target.closest('[data-open-trophy]');
     if (button) openDetail(button.dataset.openTrophy);
-  });
-  document.querySelectorAll('[data-open-trophy]').forEach((button) => {
-    if (button.closest('#trophyList')) return;
-    button.addEventListener('click', () => openDetail(button.dataset.openTrophy));
   });
   document.getElementById('detailClose').addEventListener('click', closeDetail);
   document.getElementById('detailOverlay').addEventListener('click', (event) => {
@@ -353,6 +444,10 @@ async function init() {
     }
   });
 
+  renderAudit();
+  renderKeyTrophies();
+  renderOpenQuestions();
+  renderLastChance();
   applyQueryParams();
   renderAll();
 }

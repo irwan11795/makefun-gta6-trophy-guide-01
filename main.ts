@@ -1,14 +1,16 @@
-// A working gta6-trophy-guide-01 entry (Node 22, standard library only): the guide is this directory's app/ folder,
+// GTA 6 Trophy Guide v3 (Node 22, standard library only): the guide is this directory's app/ folder,
 // plain static files a browser opens at app/index.html (ES modules, CSS, no build step), offline: it loads nothing
 // over the network, and its trophy list and guides are app/data/trophies.json. The program hands it in: it copies app/
 // and screenshots/ from beside this file to /output and writes /output/dossier.json, the summary the judge reads (your
 // screenshots, the first load's files and bytes, and your source), with the vendored make.fun library. Leave
 // vendor/makefun-frontend.ts as it is: the scorer requires dossier.json to be byte for byte what its own copy writes.
 //
-// Only the plumbing, not a winner: a plain checklist of the 55 trophies with a one-line hint each. Write a real guide
-// for every trophy in your own words, a roadmap to the platinum, filters and a spoiler setting in app/, put 3 or 4 PNG
-// or JPEG screenshots of it in screenshots/ (the first by name is the cover; shots.json says which views this
-// starter's were taken of), and run it.
+// v3 builds on the v2 guide (55 trophies, tracker, roadmap, filters, spoiler setting) with the Mile Zero pattern:
+// an audit header whose counts are computed live from the trophy data (55/55 listed, guided and sourced; 5 sources
+// cited beside guides; 12 story, 28 hidden, 1 missable, 6 unconfirmed — nothing claimed the data does not show),
+// cited step-by-step cards for the 7 key trophies (the one missable + the six unconfirmed), an open-questions
+// section that shows both what is known and our call for each unconfirmed trigger, and a last-chance panel for
+// the single missable trophy. No new trophy facts were invented: every word comes from v2's trophies.json.
 //
 // Serve it locally with `node serve.ts`, then open http://localhost:8080.
 // Outside the grader's container, MAKEFUN_OUTPUT_DIR stands in for /output:

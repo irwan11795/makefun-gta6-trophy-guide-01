@@ -76,6 +76,27 @@ body {
   font-weight: 600;
 }
 
+.anchor-nav {
+  margin-top: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: center;
+}
+
+.anchor-nav a {
+  color: #fff;
+  font-size: 13px;
+  font-weight: 700;
+  text-decoration: none;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid rgba(255, 255, 255, 0.45);
+  border-radius: 999px;
+  padding: 4px 12px;
+}
+
+.anchor-nav a:hover { background: rgba(0, 0, 0, 0.45); }
+
 main {
   max-width: 1060px;
   margin: 0 auto;
@@ -84,13 +105,18 @@ main {
   flex-direction: column;
 }
 
-/* Visual order: tracker first, roadmap after the checklist. */
+/* Visual order: tracker first, checklist next, roadmap after it, audit and
+   cited sections after the roadmap, sources last. */
 #progress { order: 1; }
 #missableBanner { order: 2; }
 .controls { order: 3; }
 #listSection { order: 4; }
 #roadmap { order: 5; }
-#sources { order: 6; }
+#audit { order: 6; }
+#keyTrophies { order: 7; }
+#openQuestions { order: 8; }
+#lastChance { order: 9; }
+#sources { order: 10; }
 
 .card {
   background: var(--card);
@@ -251,6 +277,100 @@ button.quiet { border-color: transparent; background: transparent; color: var(--
 }
 .checklist-summary li { break-inside: avoid; margin-bottom: 3px; }
 
+/* Audit */
+.audit-intro { margin-top: 0; }
+.audit-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px 22px;
+  margin: 0 0 12px;
+}
+.audit-grid div {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 6px;
+}
+.audit-grid dt { color: var(--ink-soft); font-size: 14px; }
+.audit-grid dd { margin: 0; font-weight: 800; font-size: 15px; white-space: nowrap; }
+.audit-note { font-size: 14px; color: var(--ink-soft); margin: 0; }
+
+/* Key trophies, open questions, last chance */
+.key-intro, .open-intro, .lastchance-intro { margin-top: 0; }
+.key-list, .question-list, .lastchance-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+.key-card, .question-card, .lastchance-card {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 13px 15px;
+  background: #fffdf9;
+}
+.key-head {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.key-head h3 { margin: 0; font-size: 18px; }
+.key-why { margin: 6px 0 0; font-weight: 700; color: #9a3412; font-size: 14px; }
+.key-desc, .key-guide, .key-missable, .key-unconfirmed,
+.question-known, .question-call,
+.lastchance-desc, .lastchance-when, .lastchance-guide {
+  font-size: 14px;
+  margin: 8px 0 0;
+}
+.key-desc .label, .key-guide .label,
+.question-known .label, .question-call .label,
+.lastchance-desc .label, .lastchance-when .label, .lastchance-guide .label {
+  display: block;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  margin-bottom: 2px;
+}
+.key-missable {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.key-unconfirmed {
+  background: #fef3c7;
+  border: 1px solid #fcd34d;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.question-call {
+  background: #eef7ee;
+  border: 1px solid #bbf7d0;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.key-sources-label { font-size: 12px; font-weight: 700; color: var(--ink-soft); margin: 10px 0 2px; }
+.key-sources { margin: 0 0 10px; padding-left: 20px; font-size: 14px; }
+.key-sources a { color: #b91c6e; }
+.key-meta { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+.key-meta .guide-link, .question-card .guide-link, .lastchance-card .guide-link { margin-left: auto; }
+.last-chance {
+  background: var(--danger-bg);
+  border: 2px solid var(--danger-line);
+}
+.last-chance h2 { color: #9a3412; }
+.lastchance-card { background: #fff; border-color: #fca5a5; }
+.lastchance-when {
+  background: #fee2e2;
+  border: 1px solid #fca5a5;
+  border-radius: 8px;
+  padding: 10px 12px;
+}
+.lastchance-foot { font-size: 14px; color: var(--ink-soft); margin: 12px 0 0; }
+
 /* Trophy list */
 .list-heading { font-size: 21px; margin: 6px 0 12px; }
 .trophy-list {
@@ -371,13 +491,18 @@ button.quiet { border-color: transparent; background: transparent; color: var(--
 .detail-earned { font-size: 15px; font-weight: 700; }
 
 body.roadmap-view #listSection,
-body.roadmap-view #sources { display: none; }
+body.roadmap-view #sources,
+body.roadmap-view #audit,
+body.roadmap-view #keyTrophies,
+body.roadmap-view #openQuestions,
+body.roadmap-view #lastChance { display: none; }
 body.roadmap-view .controls { display: none; }
 
 @media (max-width: 720px) {
   .hero h1 { font-size: 32px; }
   .trophy-list { grid-template-columns: 1fr; }
   .checklist-summary { columns: 1; }
+  .audit-grid { grid-template-columns: 1fr; }
   .control-row input[type="search"] { min-width: 0; width: 100%; }
   .showing { margin-left: 0; }
 }

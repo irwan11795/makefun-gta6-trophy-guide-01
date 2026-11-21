@@ -13,6 +13,9 @@
   <h1>Vice City Trophy Guide</h1>
   <p class="subtitle">Every one of the 55 trophies, a guide in our own words for each, a tracker that remembers your progress, and a roadmap to the platinum. No online trophies, no difficulty trophy, one playthrough, about 200 hours.</p>
   <p class="facts"><span>1 platinum</span><span>2 gold</span><span>6 silver</span><span>46 bronze</span><span>28 hidden</span><span>Difficulty 4/10</span></p>
+  <nav class="anchor-nav" aria-label="Guide sections">
+    <a href="#audit">Audit</a><a href="#keyTrophies">Key trophies, cited</a><a href="#openQuestions">Open questions</a><a href="#lastChance">Last chance</a><a href="#roadmap">Roadmap</a><a href="#listSection">All 55 trophies</a>
+  </nav>
 </header>
 
 <main>
@@ -80,6 +83,12 @@
     </div>
   </section>
 
+  <section id="listSection" aria-label="Trophy checklist">
+    <h2 class="list-heading">All 55 trophies <span id="listCount"></span></h2>
+    <ul id="trophyList" class="trophy-list"></ul>
+    <p class="empty" id="emptyLine" hidden>No trophies match these filters. Clear the search or change a filter.</p>
+  </section>
+
   <section class="card roadmap" id="roadmap" aria-label="Roadmap to the platinum">
     <h2>Roadmap to the platinum</h2>
     <p class="roadmap-intro">Three phases, in this order. Story first, clean-up second, stranger strands last. Save manually at the start and end of every chapter (15 save slots) — there is no New Game+ and cheats disable trophies.</p>
@@ -117,10 +126,39 @@
     </ul>
   </section>
 
-  <section id="listSection" aria-label="Trophy checklist">
-    <h2 class="list-heading">All 55 trophies <span id="listCount"></span></h2>
-    <ul id="trophyList" class="trophy-list"></ul>
-    <p class="empty" id="emptyLine" hidden>No trophies match these filters. Clear the search or change a filter.</p>
+  <section class="card audit" id="audit" aria-label="Audit — what this guide actually covers">
+    <h2>Audit — what this guide actually covers</h2>
+    <p class="audit-intro">Every number below is counted live from this page&rsquo;s own trophy data — nothing here is claimed that the data does not show. Where a trigger is not confirmed, the guide says so instead of guessing.</p>
+    <dl class="audit-grid" id="auditGrid">
+      <div><dt>Trophies listed</dt><dd id="auditTotal">55 of 55</dd></div>
+      <div><dt>With a guide in our own words</dt><dd id="auditGuides">55 of 55</dd></div>
+      <div><dt>With named sources beside the guide</dt><dd id="auditSources">55 of 55</dd></div>
+      <div><dt>Sources cited beside trophy guides</dt><dd id="auditSourceCount">5</dd></div>
+      <div><dt>Story trophies</dt><dd id="auditStory">12</dd></div>
+      <div><dt>Hidden trophies</dt><dd id="auditHidden">28</dd></div>
+      <div><dt>Missable trophies</dt><dd id="auditMissable">1</dd></div>
+      <div><dt>Triggers still unconfirmed</dt><dd id="auditUnconfirmed">6</dd></div>
+    </dl>
+    <p class="audit-note">The 5 sources cited beside trophy guides are PowerPyx, GTABase, KeenGamer, Press Start and HowToVideoGame. A 6th source, GTA Zone, is named in the Sources section below but no trophy guide on this page cites it — so it is not counted here. Trophy names and descriptions are the official PlayStation text, shown exactly as published. No claim on this page is backed by a number we cannot show: if a count is not in the data, it is not printed.</p>
+  </section>
+
+  <section class="card key-trophies" id="keyTrophies" aria-label="Key trophies, cited step by step">
+    <h2>Key trophies, cited step by step</h2>
+    <p class="key-intro">The seven trophies that decide whether a playthrough can still reach the platinum: the one missable trophy, and the six whose exact triggers the major guides have not confirmed yet. Each one shows its official description, the guide as written on this page, and the sources that back it — nothing added, nothing invented.</p>
+    <div id="keyTrophyList" class="key-list"></div>
+  </section>
+
+  <section class="card open-questions" id="openQuestions" aria-label="Open questions — what the guides have not settled">
+    <h2>Open questions — what the guides have not settled</h2>
+    <p class="open-intro">Six trophies have no confirmed trigger in the major guides yet. This section lists what is actually known about each one, and the call this guide makes — which is to follow the confirmed part and check the linked sources before spending time on the rest, rather than printing a guess as a method.</p>
+    <div id="openQuestionList" class="question-list"></div>
+  </section>
+
+  <section class="card last-chance" id="lastChance" aria-label="Last chance — the missable trophy">
+    <h2>&#9200; Last chance — the one trophy you can lose</h2>
+    <p class="lastchance-intro">There is exactly one missable trophy in the game. Every other trophy can be earned after the story ends. This is the only point of no return.</p>
+    <div id="lastChanceList" class="lastchance-list"></div>
+    <p class="lastchance-foot">Save manually at the start and end of every chapter (15 save slots). If you reach the end of Chapter 1 without the balcony meditation, that playthrough cannot earn the platinum — there is no mission replay and no New Game+.</p>
   </section>
 
   <section class="card sources" id="sources" aria-label="Sources">
